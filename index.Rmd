@@ -1,14 +1,23 @@
 ---
 title: "Gov 50 Final Project"
 author: "Olivia Data"
-description: "My final project"
+description: "My Final Project"
 output:
   distill::distill_article:
     self_contained: false
 ---
 
 
-
-## Project Thoughts
+## Milestone 1: Project Thoughts
 
 I am interested in exploring data related to the representation of women in major museums. I'm especially interested in whether or not there is a significant difference between the amount of women depicted in the art and the amount of art created by women. Do male artists' works tend to be put on display more often than female artists' works? Does the number of female artists bear on the proportions in which women are depicted in a museum's art collection?
+
+## Milestone 2: Changing my Topic and Writing a Proposal 
+
+What effects, if any, do race and gender have on Americans' opinions of the overturning of Roe v. Wade? My hypothesis is that women and people of color, especially Black people, will be more likely to disapprove of the Supreme Court's decision. Abortions most affect people with the ability to get pregnant, most of whom are women, so it would make sense that women would be more likely to support the right to choose. Also, due to economic and racial inequality, Black people tend to be disproportionately affected by issues of abortion access. 
+
+My explanatory variables in this question are gender and race. The data I've found from the Pew Research center (https://www.pewresearch.org/politics/2022/07/06/majority-of-public-disapproves-of-supreme-courts-decision-to-overturn-roe-v-wade/) is from a survey, so these variables were measured by if respondents reported themselves to be men or women and White, Black, Hispanic, or Asian.
+
+The outcome variable is whether or not a person supports the Supreme Court's decision to overturn Roe v. Wade. This was also measured through a survey in which the options were strongly support, somewhat support, somewhat disapprove, or strongly disapprove. 
+
+If my hypothesis is correct, then a higher percentage of women and people of color would say they disapprove of the overturning of Roe v. Wade than men and White people. If my hypothesis is incorrect, then these percentages will either be roughly equivalent, or a lower percentage of women and people of color would disapprove of the overturning of Roe v. Wade.
