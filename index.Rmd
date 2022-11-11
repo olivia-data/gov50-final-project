@@ -21,3 +21,30 @@ My explanatory variables in this question are gender and race. The data I've fou
 The outcome variable is whether or not a person supports the Supreme Court's decision to overturn Roe v. Wade. This was also measured through a survey in which the options were strongly support, somewhat support, somewhat disapprove, or strongly disapprove. 
 
 If my hypothesis is correct, then a higher percentage of women and people of color would say they disapprove of the overturning of Roe v. Wade than men and White people. If my hypothesis is incorrect, then these percentages will either be roughly equivalent, or a lower percentage of women and people of color would disapprove of the overturning of Roe v. Wade.
+
+
+```{r}
+library(tidyverse)
+library(readr)
+library(haven)
+data <- read_sav("W40_Nov18/ATP W40.sav")
+```
+
+```{r}
+library(ggplot2)
+data |>
+  ggplot(aes(x = SATIS_W40)) +
+  geom_histogram() +
+  labs(x = "Percent Satisfaction With the Way Things Are Going in America",
+       y = "Count",
+       title = "Distribution of Satisfaction With the Way Things Are Going in America")
+```
+The data for this distribution can be found at the following link: https://www.pewresearch.org/politics/2019/07/22/trust-and-distrust-in-america/
+
+
+
+
+
+
+
+
