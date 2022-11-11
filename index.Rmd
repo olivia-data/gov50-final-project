@@ -22,7 +22,7 @@ The outcome variable is whether or not a person supports the Supreme Court's dec
 
 If my hypothesis is correct, then a higher percentage of women and people of color would say they disapprove of the overturning of Roe v. Wade than men and White people. If my hypothesis is incorrect, then these percentages will either be roughly equivalent, or a lower percentage of women and people of color would disapprove of the overturning of Roe v. Wade.
 
-
+## Milestone 3: Creating a Data Visualization
 ```{r}
 library(tidyverse)
 library(readr)
