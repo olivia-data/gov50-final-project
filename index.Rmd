@@ -69,4 +69,3 @@ data |>
 ```
 
 This visualization shows the breakdown of opinions on allowing people convicted of felonies to vote after serving their sentence by race. Race could be a confounding variable in whether or not party alignment affects people's opinions of voting rights, Black people often lean Democrat and often support greater expansions in voting rights. However, it seems in this chart that White people, Asian and Asian-American people, and other races are also more often supportive of expanding voting rights.
-
