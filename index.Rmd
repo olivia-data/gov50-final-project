@@ -1,20 +1,24 @@
 ---
 title: "Gov 50 Final Project"
 author: "Olivia Data"
-description: "My Final Project"
+description: "Political Parties and Voting Rights"
 output:
   distill::distill_article:
     self_contained: false
 ---
+Introduction:
 
-What effects, if any, does party alignment have on American's support of voting rights? My hypothesis is that Democrats will be more likely than Republicans or Independents to support expanding voting rights and making it easier for more people to vote. However, I am not sure if a correlation between supporting voting rights and being a Democrat would be causal, as factors such as race, income, and education would also strongly affect a person's support of expanding voting rights. I believe race (because voting restrictions often disproportionaly impact people of color) may be a greater factor than party.
+What effects, if any, does party alignment have on whether or not Americans support voting rights for people convicted of felonies? My hypothesis is that Democrats will be more likely than Republicans or Independents to support allowing people convicted of felonies to vote after serving their sentence. However, I am not sure if a correlation between supporting voting rights and being a Democrat would be causal, as factors such as race, income, and education would also strongly affect a person's support of expanding such voting rights. Voting restrictions often disproportionately impact people of color. Also, people from lower income areas as well as people of color are more likely to be targeted by the police and more likely not to have access to resources such as housing or therapy that might reduce a person's likelihood of being involved in crime. I believe that party alignment will be a greater factor in whether or not a person supports allowing people convicted of felonies to vote after serving their sentence, but 
 
-My explanatory variables in this question are party alignment as well as several demographic factors. The data I've found from the Pew Research center (https://www.pewresearch.org/politics/2021/04/22/republicans-and-democrats-move-further-apart-in-views-of-voting-access/) is from a survey, so these variables were measured by how respondents reported their identities and opinions.
+My Data:
 
-The outcome variable is whether or not a person supports expanding voting rights. This was also measured through a survey in which the options were strongly support, somewhat support, somewhat disapprove, or strongly disapprove. There were a number of questions regarding different types of voting restrictions and expansions.
+The data I've found from the Pew Research center (https://www.pewresearch.org/politics/2021/04/22/republicans-and-democrats-move-further-apart-in-views-of-voting-access/) is from a survey, so these variables were measured by how respondents reported their identities and opinions. The surveys were sent to a random sample of households based on addresses randomly selected from the U.S Postal Service's Delivery Sequence File. This research design is cross-sectional.
 
-If my hypothesis is correct, then a higher percentage of Democrats would say they approve of expanding voting rights than Republicans or Independents. If my hypothesis is incorrect, then these percentages will either be roughly equivalent, or a lower percentage of Democrats would support the expansion of various voting rights.
+My explanatory variable in this question is party alignment. I also compare party alignment to demographic factors such as race, income, or education level, with a particular focus on race. 
 
+The outcome variable is whether or not a respondent supports allowing people convicted of felonies to vote after serving their sentence. This was also measured through a survey in which the options were strongly support, somewhat support, somewhat disapprove, or strongly disapprove.
+
+If my hypothesis is correct, then a higher percentage of Democrats would say they approve of felons' voting rights than Republicans or Independents. If my hypothesis is incorrect, then these percentages will either be roughly equivalent, or a lower percentage of Democrats would support the expansion of various voting rights.
 
 
 ```{r}
@@ -28,15 +32,30 @@ data
 ```{r}
 library(ggplot2)
 data |>
+  mutate(voting = case_when(VTPRIORITY_e_W87 == 1 ~ "Strongly Favor",
+                          VTPRIORITY_e_W87 == 2 ~ "Somewhat Favor",
+                          VTPRIORITY_e_W87 == 3 ~ "Somewhat Oppose",
+                          VTPRIORITY_e_W87 == 4 ~ "Strongly Oppose",
+                          VTPRIORITY_e_W87 == 99 ~ "No Answer")) |>
+   ggplot(mapping = aes(x = voting)) +
+  geom_bar()
+```
+
+Results:
+
+```{r}
+library(ggplot2)
+data |>
   mutate(party = case_when(F_PARTY_FINAL == 1 ~ "Republican",
                           F_PARTY_FINAL == 2 ~ "Democrat",
                           F_PARTY_FINAL == 3 ~ "Independent",
-                          F_PARTY_FINAL == 4 ~ "Something Else"),
+                          F_PARTY_FINAL == 4 ~ "Something Else",
+                          F_PARTY_FINAL == 99 ~ "Refused to Answer"),
          voting = case_when(VTPRIORITY_e_W87 == 1 ~ "Strongly Favor",
                           VTPRIORITY_e_W87 == 2 ~ "Somewhat Favor",
                           VTPRIORITY_e_W87 == 3 ~ "Somewhat Oppose",
                           VTPRIORITY_e_W87 == 4 ~ "Strongly Oppose",
-                          VTPRIORITY_e_W87 == 5 ~ "No Answer")) |>
+                          VTPRIORITY_e_W87 == 99 ~ "No Answer")) |>
    ggplot(mapping = aes(x = party,
                        y = voting)) +
   geom_count() +
@@ -49,17 +68,17 @@ In this visualization, it is clear that Democrats seem to be the most supportive
 ```{r}
 library(ggplot2)
 data |>
-  mutate(race = case_when(F_RACECMB == 1 ~ "White",
+ mutate(race = case_when(F_RACECMB == 1 ~ "White",
                           F_RACECMB == 2 ~ "Black",
                           F_RACECMB == 3 ~ "Asian/Asian-American",
                           F_RACECMB == 4 ~ "Mixed Race",
                           F_RACECMB == 5 ~ "Other",
-                          F_RACECMB == 6 ~ "Don’t know/Refused",),
+                          F_RACECMB == 99 ~ NA_character_),
          voting = case_when(VTPRIORITY_e_W87 == 1 ~ "Strongly Favor",
                           VTPRIORITY_e_W87 == 2 ~ "Somewhat Favor",
                           VTPRIORITY_e_W87 == 3 ~ "Somewhat Oppose",
                           VTPRIORITY_e_W87 == 4 ~ "Strongly Oppose",
-                          VTPRIORITY_e_W87 == 5 ~ "No Answer")) |>
+                          VTPRIORITY_e_W87 == 99 ~ "No Answer")) |>
    ggplot(mapping = aes(x = race,
                        y = voting)) +
   geom_count() +
@@ -67,5 +86,94 @@ data |>
        y = "Approval of Allowing People Convicted of Felonies to Vote After Serving Their Sentences",
        title = "Voting Restriction Opinions by Race")
 ```
-
 This visualization shows the breakdown of opinions on allowing people convicted of felonies to vote after serving their sentence by race. Race could be a confounding variable in whether or not party alignment affects people's opinions of voting rights, Black people often lean Democrat and often support greater expansions in voting rights. However, it seems in this chart that White people, Asian and Asian-American people, and other races are also more often supportive of expanding voting rights.
+
+
+```{r}
+race_data <- data |>
+  mutate(race = case_when(F_RACECMB == 1 ~ "White",
+                          F_RACECMB == 2 ~ "Black",
+                          F_RACECMB == 3 ~ "Asian/Asian-American",
+                          F_RACECMB == 4 ~ "Mixed Race",
+                          F_RACECMB == 5 ~ "Other",
+                          F_RACECMB == 99 ~ NA_character_),
+         voting = case_when(as.numeric(VTPRIORITY_e_W87) == 99 ~ NA_real_,
+                            TRUE ~ as.numeric(VTPRIORITY_e_W87)))
+
+data_table <- race_data |>
+  group_by(race) |>
+  summarize(voting_mean = mean(voting, na.rm = TRUE)) |>
+  pivot_wider(
+    names_from = race, 
+    values_from = voting_mean)
+
+knitr::kable(data_table)
+##x2 = recode(x, ‘1=4; 2=3; 3=2; 4=1’)
+```
+The above table shows the distribution of mean opposition of convicted felons voting after serving their sentences based on the race of the respondent. White people have the highest mean at about 2.07, while Black people have the lowest mean at about 1.483. This means that Black people, on average, show the highest level of support for allowing people convicted of felonies to vote after serving their sentence while White people, on average, show the lowest level of support. 
+
+```{r}
+party_data <- data |>
+  mutate(party = case_when(F_PARTY_FINAL == 1 ~ "Republican",
+                          F_PARTY_FINAL == 2 ~ "Democrat",
+                          F_PARTY_FINAL == 3 ~ NA_character_,
+                          F_PARTY_FINAL == 4 ~ NA_character_,
+                          F_PARTY_FINAL == 99 ~ NA_character_),
+         voting = case_when(as.numeric(VTPRIORITY_e_W87) == 99 ~ NA_real_,
+                            TRUE ~ as.numeric(VTPRIORITY_e_W87)))
+
+party_table <- party_data |>
+  group_by(party) |>
+  summarize(voting_mean = mean(voting, na.rm = TRUE)) |>
+  pivot_wider(
+    names_from = party, 
+    values_from = voting_mean) |>
+  mutate(ATE = Democrat - Republican)
+party_table
+```
+The above table shows the average treatment effect of being a Democrat on whether or not someone supports allowing people convicted of a felony to vote after serving their sentence. The average treatment effect is about -0.973, meaning that if someone is a Democrat, they are about 97 percentage points less likely to oppose allowing felons to vote.
+
+```{r}
+library(infer)
+data_filter <- data |>
+  mutate(party = case_when(F_PARTY_FINAL == 1 ~ "Republican",
+                          F_PARTY_FINAL == 2 ~ "Democrat",
+                          F_PARTY_FINAL == 3 ~ "Independent",
+                          F_PARTY_FINAL == 4 ~ "Something Else",
+                          F_PARTY_FINAL == 6 ~ "Refused to Answer"),
+         voting = case_when(as.numeric(VTPRIORITY_e_W87) <= 2 ~ "Favor",
+                          as.numeric(VTPRIORITY_e_W87) >= 3 ~ "Oppose or No Answer")) |>
+  filter(party%in% c("Republican", "Democrat"))
+
+base_diff_attend <- data_filter |>
+  infer::specify(voting ~ party, success = "Favor") |>
+  infer::calculate(stat = "diff in props", order = c("Republican", "Democrat"))
+base_diff_attend
+
+base_p_attend <- data_filter |>
+  specify(voting ~ party, success = "Favor") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("Republican", "Democrat")) |>
+  get_p_value(obs_stat = base_diff_attend, direction = "both")
+base_p_attend
+```
+The p-value for the test of the null hypothesis that there is no difference in support of allowing people convicted of felonies to vote after serving their sentence between different political parties is about 0, meaning that there is a very small probability of getting an estimated difference as large as the one estimated by chance. At a level of alpha = 0.05, we can thus reject the null hypothesis and say that the effect of party on support of felons' voting is statistically significant.
+
+
+```{r}
+fit <- lm(VTPRIORITY_e_W87 ~ c(F_PARTY_FINAL + F_RACECMB + F_EDUCCAT + F_INC_TIER2), data = data)
+
+prop_coef <- coef(fit)["prop"]
+
+summary(fit)
+
+```
+The estimated coefficient on the prop is about 0.043. The p-value is very close to zero, which means that the test of whether party has an effect on opinions of whether or not people convicted of felonies should be allowed to vote after serving their sentence is significant even when accounting for other coefficients. Because of this multiple regression and the p-value calculated earlier, I believe that the relationship between party and opinion of felons' voting is likely a causal relationship.
+
+
+Conclusion:
+
+These results point to the conclusion that political party does have an effect on whether or not someone supports voting rights for people convicted of felonies. Democrats are the most likely to believe that people convicted of felonies should be able to vote after serving their sentence. Race also is a factor in support, with Black people being the most likely to support these voting rights, but the multiple regression leads to the conclusion that party is a significant factor in support even when controlling for race.
+
+One limit with this experiment is its nature as a survey. People who self-report their identities and opinions may report incorrect information depending on what they think they should say rather than what they actually believe. While it might be difficult to fix such an error, future studies on this could always widen the sample size in order to accound for this error and to help represent the population better.
