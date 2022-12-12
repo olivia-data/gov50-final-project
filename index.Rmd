@@ -162,7 +162,9 @@ The p-value for the test of the null hypothesis that there is no difference in s
 
 
 ```{r}
-fit <- lm(VTPRIORITY_e_W87 ~ c(F_PARTY_FINAL + F_RACECMB + F_EDUCCAT + F_INC_TIER2), data = data)
+library(labelled)
+
+fit <- lm(VTPRIORITY_e_W87 ~ unlabelled(F_PARTY_FINAL) + unlabelled(F_RACECMB) + unlabelled(F_EDUCCAT) + unlabelled(F_INC_TIER2), data = data)
 
 prop_coef <- coef(fit)["prop"]
 
