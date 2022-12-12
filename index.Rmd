@@ -6,6 +6,7 @@ output:
   distill::distill_article:
     self_contained: false
 ---
+
 Introduction:
 
 What effects, if any, does party alignment have on whether or not Americans support voting rights for people convicted of felonies? My hypothesis is that Democrats will be more likely than Republicans or Independents to support allowing people convicted of felonies to vote after serving their sentence. However, I am not sure if a correlation between supporting voting rights and being a Democrat would be causal, as factors such as race, income, and education would also strongly affect a person's support of expanding such voting rights. Voting restrictions often disproportionately impact people of color. Also, people from lower income areas as well as people of color are more likely to be targeted by the police and more likely not to have access to resources such as housing or therapy that might reduce a person's likelihood of being involved in crime. I believe that party alignment will be a greater factor in whether or not a person supports allowing people convicted of felonies to vote after serving their sentence, but 
