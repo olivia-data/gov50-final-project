@@ -1518,7 +1518,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <p>Introduction:</p>
-<p>What effects, if any, does party alignment have on whether or not Americans support voting rights for people convicted of felonies? My hypothesis is that Democrats will be more likely than Republicans or Independents to support allowing people convicted of felonies to vote after serving their sentence. However, I am not sure if a correlation between supporting voting rights and being a Democrat would be causal, as factors such as race, income, and education would also strongly affect a person’s support of expanding such voting rights. Voting restrictions often disproportionately impact people of color. Also, people from lower income areas as well as people of color are more likely to be targeted by the police and more likely not to have access to resources such as housing or therapy that might reduce a person’s likelihood of being involved in crime. I believe that party alignment will be a greater factor in whether or not a person supports allowing people convicted of felonies to vote after serving their sentence, but</p>
+<p>What effects, if any, does party alignment have on whether or not Americans support voting rights for people convicted of felonies? My hypothesis is that Democrats will be more likely than Republicans or Independents to support allowing people convicted of felonies to vote after serving their sentence. However, I am not sure if a correlation between supporting voting rights and being a Democrat would be causal, as factors such as race, income, and education would also most likely have a strong effect on a person’s support of expanding such voting rights. After all, voting restrictions often disproportionately impact people of color. Also, people from lower income areas as well as people of color are more likely to be targeted by the police and more likely not to have access to resources such as housing or therapy that might reduce a person’s likelihood of being involved in crime. I believe that party alignment will be a greater factor in whether or not a person supports allowing people convicted of felonies to vote after serving their sentence because there are bound to be differences of opinions in any given demographic, but there are thus several confounding factors to consider.</p>
 <p>My Data:</p>
 <p>The data I’ve found from the Pew Research center (<a href="https://www.pewresearch.org/politics/2021/04/22/republicans-and-democrats-move-further-apart-in-views-of-voting-access/" class="uri">https://www.pewresearch.org/politics/2021/04/22/republicans-and-democrats-move-further-apart-in-views-of-voting-access/</a>) is from a survey, so these variables were measured by how respondents reported their identities and opinions. The surveys were sent to a random sample of households based on addresses randomly selected from the U.S Postal Service’s Delivery Sequence File. This research design is cross-sectional.</p>
 <p>My explanatory variable in this question is party alignment. I also compare party alignment to demographic factors such as race, income, or education level, with a particular focus on race.</p>
@@ -1564,10 +1564,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>                          <span class='va'>VTPRIORITY_e_W87</span> <span class='op'>==</span> <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"Strongly Oppose"</span>,</span>
 <span>                          <span class='va'>VTPRIORITY_e_W87</span> <span class='op'>==</span> <span class='fl'>99</span> <span class='op'>~</span> <span class='st'>"No Answer"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>voting</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Opinion on Allowing People Convicted of a Felony to Vote After Serving Their Sentence"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Count"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"Distribution of Dependent Variable"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
 </div>
+<p>The above graph shows the distribution of the dependent variable, which is people’s opinion on whether or not people convicted of felonies should be allowed to vote after serving their sentence. It seems that the most popular opinion is to strongly favor allowing them to vote, followed by somewhat favoring allowing them to vote.</p>
 <p>Results:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1592,7 +1596,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
-<p>In this visualization, it is clear that Democrats seem to be the most supportive of allowing people convicted of a felony to vote after serving their time, and Republicans seem more likely to oppose allowing them to vote.</p>
+<p>In this visualization, it is clear that Democrats seem to be the most supportive political party of allowing people convicted of a felony to vote after serving their time, and Republicans and Independents seem slightly more likely than Democrats to oppose allowing them to vote.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
@@ -1617,7 +1621,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
-<p>This visualization shows the breakdown of opinions on allowing people convicted of felonies to vote after serving their sentence by race. Race could be a confounding variable in whether or not party alignment affects people’s opinions of voting rights, Black people often lean Democrat and often support greater expansions in voting rights. However, it seems in this chart that White people, Asian and Asian-American people, and other races are also more often supportive of expanding voting rights.</p>
+<p>This visualization shows the breakdown of opinions on allowing people convicted of felonies to vote after serving their sentence by race. Race could be a confounding variable in whether or not party alignment affects people’s opinions of voting rights; Black people often lean Democrat and often support greater expansions in voting rights. However, it seems in this chart that White people, Asian and Asian-American people, and other races are also often supportive of felons’ voting rights.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>race_data</span> <span class='op'>&lt;-</span> <span class='va'>data</span> <span class='op'>|&gt;</span></span>
@@ -1665,7 +1669,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>##x2 = recode(x, ‘1=4; 2=3; 3=2; 4=1’)</span></span></code></pre>
 </div>
 </div>
-<p>The above table shows the distribution of mean opposition of convicted felons voting after serving their sentences based on the race of the respondent. White people have the highest mean at about 2.07, while Black people have the lowest mean at about 1.483. This means that Black people, on average, show the highest level of support for allowing people convicted of felonies to vote after serving their sentence while White people, on average, show the lowest level of support.</p>
+<p>The above table shows the distribution of mean opposition of convicted felons voting after serving their sentences based on the race of the respondent. White people have the highest mean at about 2.07, while Black people have the lowest mean at about 1.483. This means that Black people, on average, show the highest level of support for allowing people convicted of felonies to vote after serving their sentence while White people, on average, show a lower level of support.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>party_data</span> <span class='op'>&lt;-</span> <span class='va'>data</span> <span class='op'>|&gt;</span></span>
@@ -1691,7 +1695,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
      &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
 1     1.59       2.56  1.97 -0.973</code></pre>
 </div>
-<p>The above table shows the average treatment effect of being a Democrat on whether or not someone supports allowing people convicted of a felony to vote after serving their sentence. The average treatment effect is about -0.973, meaning that if someone is a Democrat, they are about 97 percentage points less likely to oppose allowing felons to vote.</p>
+<p>The above table shows the average treatment effect of being a Democrat on whether or not someone supports allowing people convicted of a felony to vote after serving their sentence. The average treatment effect is about -0.973, meaning that if someone is a Democrat, they are about 1 point more supportive on average of allowing people convicted of felonies to vote than if they are a Republican.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/infer'>infer</a></span><span class='op'>)</span></span>
@@ -1792,10 +1796,11 @@ Residual standard error: 9.11 on 5093 degrees of freedom
 Multiple R-squared:  0.02754,   Adjusted R-squared:  0.02468 
 F-statistic: 9.616 on 15 and 5093 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<p>The estimated coefficient on the prop is about 0.043. The p-value is very close to zero, which means that the test of whether party has an effect on opinions of whether or not people convicted of felonies should be allowed to vote after serving their sentence is significant even when accounting for other coefficients. Because of this multiple regression and the p-value calculated earlier, I believe that the relationship between party and opinion of felons’ voting is likely a causal relationship.</p>
+<p>The estimated coefficient on the prop for Democrats is -1.138 The p-value on this estimate is 0.00237, which is less than an alpha value of 0.05. Thus, at this level, we can reject the null hypothesis that party has no effect on opinion of felons voting. Even when accounting for other coefficients, like race, income, or education, this test is statistically significant.</p>
+<p>Because of this multiple regression and the p-value calculated earlier, it appears that the relationship between party and opinion of felons’ voting is likely a causal relationship.</p>
 <p>Conclusion:</p>
 <p>These results point to the conclusion that political party does have an effect on whether or not someone supports voting rights for people convicted of felonies. Democrats are the most likely to believe that people convicted of felonies should be able to vote after serving their sentence. Race also is a factor in support, with Black people being the most likely to support these voting rights, but the multiple regression leads to the conclusion that party is a significant factor in support even when controlling for race.</p>
-<p>One limit with this experiment is its nature as a survey. People who self-report their identities and opinions may report incorrect information depending on what they think they should say rather than what they actually believe. While it might be difficult to fix such an error, future studies on this could always widen the sample size in order to accound for this error and to help represent the population better.</p>
+<p>One limitation with this experiment is its nature as a survey. People who self-report their identities and opinions may report incorrect information depending on what they think they should say rather than what they actually believe. While it might be difficult to fix such an error, future studies on this could always widen the sample size in order to account for this error and to help represent the population better.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
